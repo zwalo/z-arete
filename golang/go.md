@@ -56,10 +56,36 @@
       s string   
     )
 ```
+```go
+package main
+
+import "fmt"
+
+const ( 
+	c1 = 10 //첫 번째 값은 무조건 초기화해야 함
+	c2 // 선언되지 않은 값은 그 전에 선언된 값을 그대로 할당받음
+	c3
+	c4 = "goorm" //다른 형 선언 가능
+	c5
+	c6 = iota //c8까지 index값 저장
+	c7
+	c8
+	c9 = "earth"
+	c10
+	c11 = "End"
+)
+
+func main() {
+	fmt.Println(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11)
+    //10,10,10,goorm,goorm,5,6,7,earth,10,End
+}    
+```
 
 3.zero value   
   선언만 하고 초기화하지 않은 변수는 zero value로 초기화   
   
+  *선언 후 사용하지 않는 변수가 있다면 go는 에러를 낸다.
+
   숫자 타입 : 0   
   boolean 타입 : false   
   string 타입 : ""
