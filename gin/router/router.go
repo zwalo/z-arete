@@ -1,13 +1,10 @@
 package router
 
 import (
-	"fmt"
 	"time"
 
-	"github.com/zzase/TIL/gin/router/handler"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis"
 )
 
 type Router struct {
@@ -17,8 +14,8 @@ type Router struct {
 
 func New() *Router {
 	inst := &Router{
-		router : gin.New(),
-		endPoint : "http://localhost:3000"
+		router:   gin.New(),
+		endPoint: "http://localhost:3000",
 	}
 
 	inst.router.Use(gin.Logger())
@@ -36,10 +33,12 @@ func New() *Router {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	nameHandler := hadler.NewNameHandler()
+	nameHandler := handler.NewNameHandler()
 
 	root := inst.router.Group("", authCheck.VerifyToken)
 	{
 		root.GET("/names", nameHandler.GetName)
 	}
+
+	return inst
 }
