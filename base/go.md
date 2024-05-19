@@ -146,3 +146,27 @@ func main() {
     fmt.Println("②의 결과:", quotient, remainder)
 }
 ```
+정렬
+ - 예시는 오름차순 (->)
+```go
+func solution(s string) string {
+	slice := strings.Split(s, " ")
+
+	sort.Slice(slice, func(i, j int) bool {
+		x, _ := strconv.Atoi(slice[i])
+		y, _ := strconv.Atoi(slice[j])
+
+		return x < y
+	})
+
+	return fmt.Sprintf("%s %s", slice[0], slice[len(slice)-1])
+}
+```
+
+strings
+```go
+func solution(s string) string {
+    // 맨 앞글자만 대문자로, 뒤의 모든 문자는 소문자로 치환
+	return strings.Title(strings.ToLower(s))
+}
+```
