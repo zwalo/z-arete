@@ -165,8 +165,8 @@ func solution(s string) string {
 
 strings
 ```go
-func solution(s string) string {
     // 맨 앞글자만 대문자로, 뒤의 모든 문자는 소문자로 치환
-	return strings.Title(strings.ToLower(s))
-}
+	strings.Title(strings.ToLower(s))
+    // 2진법 변환
+    strconv.FormatInt(int64(len(temp)), 2)
 ```
