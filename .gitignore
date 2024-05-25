@@ -1,7 +1,5 @@
 .DS_Store
 
-*.mod
-
 //실행파일
 *.exe
 *.exec
