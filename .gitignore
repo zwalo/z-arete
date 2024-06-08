@@ -37,3 +37,4 @@ logs/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+*.csv
