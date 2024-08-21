@@ -13,7 +13,7 @@ import (
 func main() {
 	// 상수 정의
 	mandatoryNumbers := []int{27, 38}
-	optionalNumbers := getBestNumbers()
+	optionalNumbers := getBestNumbers(2)
 	allNumbers := make([]int, 45)
 	for i := 1; i <= 45; i++ {
 		allNumbers[i-1] = i
@@ -23,15 +23,22 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	// 5세트 생성
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 4; i++ {
 		set := generateLottoSet(mandatoryNumbers, optionalNumbers, allNumbers)
 		fmt.Println(set)
 	}
+
+	optionalNumbers = getBestNumbers(6)
+	sort.Slice(optionalNumbers, func(i, j int) bool {
+		return optionalNumbers[i] < optionalNumbers[j]
+	})
+
+	fmt.Println(optionalNumbers)
 }
 
-func getBestNumbers() []int {
+func getBestNumbers(num int) []int {
 	// CSV 파일 열기
-	bestNumbers := make([]int, 6)
+	bestNumbers := make([]int, num)
 	file, err := os.Open("lotto.csv")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -81,7 +88,7 @@ func getBestNumbers() []int {
 		return freqList[i].Value > freqList[j].Value
 	})
 
-	for i := 0; i < 6; i++ {
+	for i := 0; i < num; i++ {
 		bestNumbers[i] = freqList[i].Key
 	}
 	return bestNumbers
@@ -94,7 +101,7 @@ func generateLottoSet(mandatoryNumbers, optionalNumbers, allNumbers []int) []int
 		chosenNumbers[num] = true
 	}
 
-	// 선택 숫자에서 2개 추가
+	// 선택 숫자에서 나머지 추가
 	for len(chosenNumbers) < 4 {
 		num := optionalNumbers[rand.Intn(len(optionalNumbers))]
 		chosenNumbers[num] = true
